@@ -3,6 +3,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import homeRouter from './routes/home';
 import taskRouter from './routes/tasks';
+import { notFoundHandler } from './middlewares/notFoundHandler';
+import { errorHandler } from './middlewares/errorHandler';
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -21,21 +23,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/', homeRouter);
 app.use('/tasks', taskRouter);
 
-app.use((req, res, next) => {
-  const error = new Error('Not Found');
-  res.status(404);
-  next(error);
-});
+app.use(notFoundHandler);
 
-app.use((error, req, res, next) => {
-  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
-  res.status(statusCode);
-  res.json({
-    message: error.message,
-    stack: process.env.NODE_ENV === 'production' ? '🥞' : error.stack
-  });
-});
-
+app.use(errorHandler);
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
