@@ -1,6 +1,6 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 
-const userRouter = Router();
+const userRouter : Router = Router();
 
 /**
  * @swagger
@@ -17,11 +17,11 @@ const userRouter = Router();
  *         description: List<User>
  */
 
-userRouter.get('/', (req, res) => {
+userRouter.get('/', (req: Request, res: Response) => {
     res.json([{
-        complete: false,
-        description: 'user1',
-        user_id: 1
+        type: 2,
+        description: 'User1',
+        user_manager: 1,
     }]);
 });
 
@@ -40,7 +40,7 @@ userRouter.get('/', (req, res) => {
  *         description: Object<User>
  */
 
-userRouter.post('/add', (req, res) => {
+userRouter.post('/add', (req: Request, res: Response) => {
     res.json({
         success: true,
         data: 'User Added!'

@@ -1,6 +1,6 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 
-const taskRouter = Router();
+const taskRouter : Router = Router();
 
 /**
  * @swagger
@@ -17,12 +17,14 @@ const taskRouter = Router();
  *         description: List<Task>
  */
 
-taskRouter.get('/', (req, res) => {
-    res.json([{
-        complete: false,
-        description: 'Task1',
-        user_id: 1
-    }]);
+taskRouter.get('/', (req: Request, res: Response) => {
+    res.json([
+        {
+            complete: false,
+            description: 'Task1',
+            user_id: 1,
+        },
+    ]);
 });
 
 /**
@@ -40,7 +42,7 @@ taskRouter.get('/', (req, res) => {
  *         description: Object<Task>
  */
 
-taskRouter.post('/add', (req, res) => {
+taskRouter.post('/add', (req: Request, res: Response) => {
     res.json({
         success: true,
         data: 'Task Added!'
