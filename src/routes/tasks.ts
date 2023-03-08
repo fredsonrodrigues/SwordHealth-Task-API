@@ -18,11 +18,13 @@ const taskRouter = Router();
  */
 
 taskRouter.get('/', (req, res) => {
-    res.json([{
-        complete: false,
-        description: 'Task1',
-        user_id: 1
-    }]);
+    res.json([
+        {
+            complete: false,
+            description: 'Task1',
+            user_id: 1,
+        },
+    ]);
 });
 
 /**

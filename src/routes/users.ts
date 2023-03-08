@@ -19,9 +19,9 @@ const userRouter = Router();
 
 userRouter.get('/', (req, res) => {
     res.json([{
-        complete: false,
-        description: 'user1',
-        user_id: 1
+        type: 2,
+        description: 'User1',
+        user_manager: 1,
     }]);
 });
 
