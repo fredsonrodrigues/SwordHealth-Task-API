@@ -1,6 +1,6 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 
-const homeRouter = Router();
+const homeRouter: Router = Router();
 
 /**
  * @swagger
@@ -16,7 +16,7 @@ const homeRouter = Router();
  *       200:
  *         description: Objeto 'Bem-vindo'
  */
-homeRouter.get('/', (req, res) => {
+homeRouter.get('/', (req: Request, res: Response) => {
     res.json({
         success: true,
         data: 'Hello World!'

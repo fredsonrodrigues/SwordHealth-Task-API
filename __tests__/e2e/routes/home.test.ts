@@ -1,13 +1,14 @@
 import request from 'supertest';
-import app from "../../../src/app";
+import app from '../../../src/app';
+import { Server } from 'http';
 
-let server;
+let server: Server;
 
-beforeAll((done) => {
+beforeAll((done: jest.DoneCallback) => {
     server = app.listen(3001, () => done());
-})
+});
 
-afterAll((done) => {
+afterAll((done: jest.DoneCallback) => {
     server.close(() => done());
 });
 
