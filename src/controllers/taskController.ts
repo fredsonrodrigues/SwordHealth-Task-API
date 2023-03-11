@@ -7,7 +7,7 @@ const taskController = {
         const tasks = await prisma.task.findMany();
         res.json({
             success: true,
-            message: `Lista de usuários`,
+            message: `Task List`,
             data: tasks
         });
     },

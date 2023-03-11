@@ -36,28 +36,41 @@ describe('Users API', () => {
   });
 
   it('should add a task', async () => {
-    // @ts-ignore -- awaiting fix:
-    prismaMock.user.create.mockResolvedValue({
-      id: 1,
+    let usermock = {
       name: 'Fredson Rodrigues',
       email: 'fredson.rodrigues.principal@gmail.com',
       password: '123456',
       role: "ADMIN",
       admin_user: 0
-    })
+    }
+    // @ts-ignore -- awaiting fix:
+    prismaMock.user.create.mockResolvedValue(usermock)
     const response = await request(server)
       .post('/users/add')
-      .send({
-        name: 'Fredson Rodrigues',
-        email: 'fredson.rodrigues.principal@gmail.com',
-        password: '123456',
-        role: "ADMIN",
-        admin_user: 0
-      });
+      .send(usermock);
 
     expect(response.status).toBe(200);
     expect(response.body.data).toHaveProperty('email');
     expect(response.body.data.email).toBe('fredson.rodrigues.principal@gmail.com');
     expect(response.body.message).toEqual("Usuário com email fredson.rodrigues.principal@gmail.com criado com sucesso!")
+    let userID = response.body.data.id
+
+    const response2 = await request(server)
+      .patch(`/users/update/${userID}`)
+      .send({...usermock, email: 'fredson.rodrigues.principal2@gmail.com'});
+
+    expect(response2.status).toBe(200);
+    expect(response2.body.data).toHaveProperty('email');
+    expect(response2.body.data.email).toBe('fredson.rodrigues.principal2@gmail.com');
+    expect(response2.body.message).toEqual("Usuário com email fredson.rodrigues.principal2@gmail.com criado com sucesso!")
+
+    const response3 = await request(server)
+      .delete(`/users/delete/${userID}`)
+      .send(usermock);
+
+    expect(response3.status).toBe(200);
+    expect(response3.body.data).toHaveProperty('email');
+    expect(response3.body.data.email).toBe('fredson.rodrigues.principal@gmail.com');
+    expect(response3.body.message).toEqual(`Usuário com id ${userID} excluído com sucesso!`)
   });
 });
