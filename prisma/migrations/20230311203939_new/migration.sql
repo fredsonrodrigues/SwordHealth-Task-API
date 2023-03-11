@@ -3,7 +3,7 @@ CREATE TABLE `task` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(100) NOT NULL,
     `description` LONGTEXT NOT NULL,
-    `timestamp` DATETIME(0) NOT NULL,
+    `timestamp` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `user_id` INTEGER NOT NULL,
 
     UNIQUE INDEX `unique_id`(`id`),
