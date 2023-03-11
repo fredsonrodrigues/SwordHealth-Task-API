@@ -1,6 +1,5 @@
-import { Router, Request, Response } from 'express';
-import { Prisma } from '@prisma/client'
-import prisma from '../client';
+import { Router } from 'express';
+import userController from '../controllers/userController';
 
 const userRouter: Router = Router();
 
@@ -48,14 +47,7 @@ const userRouter: Router = Router();
  *         description: List<User>
  */
 
-userRouter.get('/', async (req: Request, res: Response) => {
-    const users = await prisma.user.findMany();
-    res.json({
-        success: true,
-        message: `Lista de usuários`,
-        data: users
-    });
-});
+userRouter.get('/', userController.getAllUsers);
 
 /**
  * @swagger
@@ -79,22 +71,7 @@ userRouter.get('/', async (req: Request, res: Response) => {
  *         description: Object<User>
  */
 
-userRouter.post('/add', async (req: Request, res: Response) => {
-    const user: Prisma.UserCreateInput = req.body;
-    const returningFields: Prisma.UserSelect = {
-        email: true,
-        id: true
-    };
-    const newUser = await prisma.user.create({
-        data: user,
-        select: returningFields
-    })
-    res.json({
-        success: true,
-        message: `Usuário com email ${newUser.email} criado com sucesso!`,
-        data: newUser
-    });
-});
+userRouter.post('/add', userController.createUser);
 
 /**
 * @swagger
@@ -120,19 +97,7 @@ userRouter.post('/add', async (req: Request, res: Response) => {
 *           500:
 *               description: Erro interno do servidor
 */
-userRouter.delete('/delete/:userId', async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId);
-    const deletedUser = await prisma.user.delete({
-        where: {
-            id: userId
-        }
-    });
-    res.json({
-        success: true,
-        message: `Usuário com id ${userId} excluído com sucesso!`,
-        data: deletedUser
-    });
-});
+userRouter.delete('/delete/:userId', userController.deleteUser);
 
 /**
 * 
@@ -161,21 +126,7 @@ userRouter.delete('/delete/:userId', async (req: Request, res: Response) => {
 *           200:
 *               description: Usuário atualizado com sucesso
 */
-userRouter.patch('/update/:userId', async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId);
-    const userData: Prisma.UserUpdateInput = req.body;
-    const updatedUser = await prisma.user.update({
-        where: {
-            id: userId
-        },
-        data: userData
-    });
-    res.json({
-        success: true,
-        message: `Usuário com id ${userId} atualizado com sucesso!`,
-        data: updatedUser
-    });
-});
+userRouter.patch('/update/:userId', userController.updateUser);
 
 
 export default userRouter;
