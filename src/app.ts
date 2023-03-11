@@ -7,6 +7,18 @@ import { notFoundHandler } from './middlewares/notFoundHandler';
 import { errorHandler } from './middlewares/errorHandler';
 import userRouter from './routes/users';
 
+// --- Polyfill for Prisma - Serializate big int
+declare global {
+  interface BigInt {
+      toJSON(): string;
+  }
+}
+
+BigInt.prototype.toJSON = function (): string {
+  return this.toString();
+};
+// ---
+
 const swaggerOptions: Options = {
   swaggerDefinition: {
     info: {
@@ -20,6 +32,8 @@ const swaggerOptions: Options = {
 
 const app: Application = express();
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/', homeRouter);
 app.use('/tasks', taskRouter);

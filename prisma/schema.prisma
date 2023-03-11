@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Task {
-  id          BigInt   @unique(map: "unique_id") @default(autoincrement())
+  id          Int   @unique(map: "unique_id") @default(autoincrement())
   title       String   @db.VarChar(100)
   description String   @db.LongText
   timestamp   DateTime @db.DateTime(0)
-  user_id     BigInt
+  user_id     Int
   user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "lnk_user_task")
 
   @@index([user_id], map: "lnk_user_task")
@@ -20,12 +20,12 @@ model Task {
 }
 
 model User {
-  id         BigInt    @unique(map: "unique_id") @default(autoincrement())
+  id         Int    @unique(map: "unique_id") @default(autoincrement())
   name       String    @db.VarChar(255)
   email      String    @db.LongText
   password   String    @db.Text
   role       user_role
-  admin_user BigInt
+  admin_user Int
   task       Task[]
 
   @@map("user")
