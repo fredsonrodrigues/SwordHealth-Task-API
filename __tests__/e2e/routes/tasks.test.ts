@@ -5,7 +5,7 @@ import { Server } from 'http';
 let server: Server;
 
 beforeAll((done: jest.DoneCallback) => {
-  server = app.listen(3000, () => done());
+  server = app.listen(5000, () => done());
 })
 
 afterAll((done: jest.DoneCallback) => {

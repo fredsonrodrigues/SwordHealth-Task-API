@@ -6,7 +6,7 @@ import { prismaMock } from '../../../src/singleton'
 let server: Server;
 
 beforeAll((done: jest.DoneCallback) => {
-  server = app.listen(3002, () => done());
+  server = app.listen(5002, () => done());
 })
 
 afterAll((done: jest.DoneCallback) => {
