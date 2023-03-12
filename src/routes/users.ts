@@ -36,8 +36,8 @@ const userRouter: Router = Router();
  * @swagger
  * /users/:
  *   get:
- *     summary: Rota de listar users
- *     description: Retorna uma lista de users
+ *     summary: List users endpoint
+ *     description: Returns a list of Users
  *     tags:
  *         - Users
  *     produces:
@@ -53,15 +53,15 @@ userRouter.get('/', userController.getAllUsers);
  * @swagger
  * /users/add:
  *   post:
- *     summary: Rota de Criar users
- *     description: Cria uma user
+ *     summary: User create endpoint
+ *     description: Create a new User
  *     tags:
  *         - Users
  *     produces:
  *         - application/json
  *     parameters:
  *          - name: data
- *            description: Objeto JSON a ser criado
+ *            description: JSON User model
  *            in: body
  *            required: true
  *            schema:
@@ -77,25 +77,25 @@ userRouter.post('/add', userController.createUser);
 * @swagger
 * /users/delete/{id}:
 *   delete:
-*       summary: Rota de Excluir usuário
-*       description: Exclui um usuário pelo ID
+*       summary: Delete user endpoint
+*       description: Delete a user by ID
 *       tags:
 *          - Users
 *       produces:
 *          - application/json
 *       parameters:
 *          - name: id
-*            description: ID do usuário a ser excluído
+*            description: user id
 *            in: path
 *            required: true
 *            type: integer
 *       responses:
 *           200:
-*               description: Usuário excluído com sucesso
+*               description: User deleted successfully
 *           404:
-*               description: Usuário não encontrado
+*               description: User Not found
 *           500:
-*               description: Erro interno do servidor
+*               description: Internal Error
 */
 userRouter.delete('/delete/:userId', userController.deleteUser);
 
@@ -104,8 +104,8 @@ userRouter.delete('/delete/:userId', userController.deleteUser);
 * @swagger
 * /users/update/{id}:
 *   patch:
-*       summary: Rota de atualização de usuário
-*       description: Atualiza informações de um usuário a partir de seu ID
+*       summary: User update endpoint
+*       description: using the user id, update the data from selected user
 *       tags:
 *          - Users
 *       produces:
@@ -113,18 +113,18 @@ userRouter.delete('/delete/:userId', userController.deleteUser);
 * 
 *       parameters:
 *           - name: id
-*             description: ID do usuário a ser atualizado
+*             description: User Id
 *             in: path
 *             required: true
 *           - name: data
-*             description: Objeto JSON com as informações a serem atualizadas
+*             description: Updated User Model JSON
 *             in: body
 *             required: true
 *             schema:
 *                $ref: '#/definitions/User'
 *       responses:
 *           200:
-*               description: Usuário atualizado com sucesso
+*               description: User updated successfully
 */
 userRouter.patch('/update/:userId', userController.updateUser);
 
