@@ -1,4 +1,4 @@
-import prisma from "src/client";
+import prisma from "../client";
 
 async function main() {
     await prisma.user.create({
