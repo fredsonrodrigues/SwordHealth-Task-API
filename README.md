@@ -33,4 +33,4 @@ yarn prod:test
 ```
 
 ## Obs
-The application isn't finished as I expected.
+The .env is in the project just to make tests more easier.

@@ -33,6 +33,8 @@ const taskRouter : Router = Router();
  *   get:
  *     summary: Rota de listar Tasks
  *     description: Retorna uma lista de tasks
+ *     security:
+ *         - bearerAuth: []
  *     tags:
  *         - Tasks
  *     produces:
@@ -50,6 +52,8 @@ taskRouter.get('/', taskController.getAlltasks);
  *   post:
  *     summary: Rota de Criar tasks
  *     description: Cria uma task
+ *     security:
+ *         - bearerAuth: []
  *     tags:
  *         - Tasks
  *     produces:
@@ -73,6 +77,8 @@ taskRouter.post('/add', taskController.createtask);
 *   delete:
 *       summary: Rota de Excluir Task
 *       description: Drop um task pelo ID
+*       security:
+*          - bearerAuth: []
 *       tags:
 *          - Tasks
 *       produces:
@@ -100,6 +106,8 @@ taskRouter.delete('/delete/:taskId', taskController.deleteTask);
 *   patch:
 *       summary: Rota de atualização de task
 *       description: Atualiza informações de um task a partir de seu ID
+*       security:
+*          - bearerAuth: []
 *       tags:
 *          - Tasks
 *       produces:
