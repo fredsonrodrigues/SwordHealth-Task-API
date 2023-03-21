@@ -26,14 +26,25 @@ const swaggerOptions: Options = {
       version: '1.0.0',
       description: "Task services app's API"
     },
+    securityDefinitions: {
+      bearerAuth: {
+        type: 'apiKey',
+        name: 'Authorization',
+        scheme: 'bearer',
+        in: 'header',
+      },
+    },
   },
+  security: [{
+    bearerAuth: []
+  }],
   apis: ['./src/routes/*.ts'],
 };
 
 const app: Application = express();
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/', homeRouter);
 app.use('/tasks', taskRouter);

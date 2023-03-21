@@ -22,15 +22,15 @@ later, you will up the services
 docker-compose up -d
 ```
 
-when the services start, you'll need configurate the Prisma
+If you are starting for the first time, the you should create the database and seed
 ```sh
-yarn prod:configure-prisma
+yarn prod:configure-app
 ```
 
-after this, the application can be used. You can run the tests with
+after this, the application is ready to use. You can run the tests with
 ```sh
 yarn prod:test
 ```
 
 ## Obs
-The application isn't finished as I expected.
+The .env is in the project just to make tests more easier.

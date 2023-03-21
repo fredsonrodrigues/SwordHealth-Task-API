@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { verifyToken } from '../middlewares/authHandler';
 import userController from '../controllers/userController';
 
 const userRouter: Router = Router();
@@ -38,6 +39,8 @@ const userRouter: Router = Router();
  *   get:
  *     summary: List users endpoint
  *     description: Returns a list of Users
+ *     security:
+ *      - bearerAuth: []
  *     tags:
  *         - Users
  *     produces:
@@ -47,7 +50,7 @@ const userRouter: Router = Router();
  *         description: List<User>
  */
 
-userRouter.get('/', userController.getAllUsers);
+userRouter.get('/', verifyToken, userController.getAllUsers);
 
 /**
  * @swagger
@@ -55,6 +58,8 @@ userRouter.get('/', userController.getAllUsers);
  *   post:
  *     summary: User create endpoint
  *     description: Create a new User
+ *     security:
+ *      - bearerAuth: []
  *     tags:
  *         - Users
  *     produces:
@@ -71,7 +76,7 @@ userRouter.get('/', userController.getAllUsers);
  *         description: Object<User>
  */
 
-userRouter.post('/add', userController.createUser);
+userRouter.post('/add', verifyToken, userController.createUser);
 
 /**
 * @swagger
@@ -79,6 +84,8 @@ userRouter.post('/add', userController.createUser);
 *   delete:
 *       summary: Delete user endpoint
 *       description: Delete a user by ID
+*       security:
+*          - bearerAuth: []
 *       tags:
 *          - Users
 *       produces:
@@ -97,7 +104,7 @@ userRouter.post('/add', userController.createUser);
 *           500:
 *               description: Internal Error
 */
-userRouter.delete('/delete/:userId', userController.deleteUser);
+userRouter.delete('/delete/:userId', verifyToken, userController.deleteUser);
 
 /**
 * 
@@ -106,6 +113,8 @@ userRouter.delete('/delete/:userId', userController.deleteUser);
 *   patch:
 *       summary: User update endpoint
 *       description: using the user id, update the data from selected user
+*       security:
+*          - bearerAuth: []
 *       tags:
 *          - Users
 *       produces:
@@ -126,7 +135,7 @@ userRouter.delete('/delete/:userId', userController.deleteUser);
 *           200:
 *               description: User updated successfully
 */
-userRouter.patch('/update/:userId', userController.updateUser);
+userRouter.patch('/update/:userId', verifyToken, userController.updateUser);
 
 
 export default userRouter;

@@ -8,7 +8,7 @@
     "test": "jest --coverage",
     "build:docker": "docker build -t alitectec/task-api-node .",
     "prod:test": "docker exec -it task_ap1 yarn test",
-    "prod:configure-prisma": "docker exec -it task_ap1 npx prisma generate && yarn prod:migrate-db && yarn prod:seed-defaults",
+    "prod:configure-app": "yarn prod:migrate-db && yarn prod:seed-defaults",
     "prod:migrate-db": "docker exec -it task_ap1 npx prisma migrate deploy",
     "prod:seed-defaults": "docker exec -it task_ap1 npx ts-node src/seeder/userSeeder.ts"
   },
@@ -29,6 +29,7 @@
   "dependencies": {
     "@prisma/client": "4.11.0",
     "@types/swagger-ui-express": "^4.1.3",
+    "jsonwebtoken": "^9.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",
     "ts-node": "^10.9.1"
