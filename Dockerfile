@@ -12,4 +12,6 @@ EXPOSE 3000
 
 RUN npx prisma generate
 
+RUN yarn test
+
 CMD [ "yarn", "start" ]
