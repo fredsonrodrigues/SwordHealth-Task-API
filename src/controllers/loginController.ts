@@ -19,7 +19,7 @@ const loginController = {
         id: true
       }
     });
-    console.log(req.body)
+    
     if (!user || password != user.password) {
       return res.status(401).json({ message: 'invalid email ou password' });
     }

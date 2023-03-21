@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { verifyToken } from '../middlewares/authHandler';
 import taskController from '../controllers/taskController';
 
 const taskRouter : Router = Router();
@@ -44,7 +45,7 @@ const taskRouter : Router = Router();
  *         description: List<Task>
  */
 
-taskRouter.get('/', taskController.getAlltasks);
+taskRouter.get('/', verifyToken, taskController.getAlltasks);
 
 /**
  * @swagger
@@ -70,7 +71,7 @@ taskRouter.get('/', taskController.getAlltasks);
  *         description: Object<Task>
  */
 
-taskRouter.post('/add', taskController.createtask);
+taskRouter.post('/add', verifyToken, taskController.createtask);
 /**
 * @swagger
 * /tasks/delete/{id}:
@@ -97,7 +98,7 @@ taskRouter.post('/add', taskController.createtask);
 *           500:
 *               description: Erro interno do servidor
 */
-taskRouter.delete('/delete/:taskId', taskController.deleteTask);
+taskRouter.delete('/delete/:taskId', verifyToken, taskController.deleteTask);
 
 /**
 * 
@@ -128,5 +129,5 @@ taskRouter.delete('/delete/:taskId', taskController.deleteTask);
 *           200:
 *               description: task atualizado com sucesso
 */
-taskRouter.patch('/update/:taskId', taskController.updateTask);
+taskRouter.patch('/update/:taskId', verifyToken, taskController.updateTask);
 export default taskRouter;

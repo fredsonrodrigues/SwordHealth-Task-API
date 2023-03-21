@@ -25,8 +25,7 @@ describe('Users API', () => {
         admin_user: 1
       }
     ];
-    // @ts-ignore -- awaiting fix:
-    prismaMock.user.findMany.mockResolvedValue(listUsers)
+
     const response = await request(server).get('/users');
 
     expect(response.status).toBe(200);
@@ -43,8 +42,6 @@ describe('Users API', () => {
       role: "ADMIN",
       admin_user: 0
     }
-    // @ts-ignore -- awaiting fix:
-    prismaMock.user.create.mockResolvedValue(usermock)
     const response = await request(server)
       .post('/users/add')
       .send(usermock);
@@ -70,7 +67,7 @@ describe('Users API', () => {
 
     expect(response3.status).toBe(200);
     expect(response3.body.data).toHaveProperty('email');
-    expect(response3.body.data.email).toBe('fredson.rodrigues.principal@gmail.com');
+    expect(response3.body.data.email).toBe('fredson.rodrigues.principal2@gmail.com');
     expect(response3.body.message).toEqual(`Usuário com id ${userID} excluído com sucesso!`)
   });
 });
