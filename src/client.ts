@@ -10,7 +10,15 @@ prisma.$use(async (params, next) => {
 
     const after = Date.now()
 
-    console.log(`Query ${params.model}.${params.action} took ${after - before}ms`)
+    if (params.model === 'Task' && params.action == 'create') {
+        const task = params.args.data
+        const user = await prisma.user.findFirst({
+            where: {
+                id: task.user_id
+            }
+        });
+        console.log(`${user.name} create the task: ${task.title}`)
+    }
 
     return result
 })
