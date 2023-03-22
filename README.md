@@ -33,4 +33,5 @@ yarn prod:test
 ```
 
 ## Obs
-The .env is in the project just to make tests more easier.
+ - The .env is in the project just to make tests more easier.
+ - The listner for new test is working. can be used with an AMPQ or socket tecnology for notification.
